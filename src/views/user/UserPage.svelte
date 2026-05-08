@@ -205,7 +205,6 @@
       {pagination}
       {optionsMap}
       on:add={handleAdd}
-      on:export={handleExport}
       on:view={(e) => handleView(e.detail)}
       on:edit={(e) => handleEdit(e.detail)}
       on:delete={(e) => handleDelete(e.detail)}

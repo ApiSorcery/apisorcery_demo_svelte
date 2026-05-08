@@ -1,5 +1,6 @@
 {
   "application": {
+    "framework": "svelte",
     "language": "ts",
     "outputDir": "./src/apis/auto"
   },

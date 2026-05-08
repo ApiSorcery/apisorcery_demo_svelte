@@ -13,10 +13,6 @@
     dispatch('add');
   }
 
-  function handleExport() {
-    dispatch('export');
-  }
-
   function handleView(user: UserModel) {
     dispatch('view', user);
   }
@@ -52,7 +48,6 @@
   <div class="table-header">
     <h3>User Information</h3>
     <div class="header-actions">
-      <button on:click={handleExport}>Export</button>
       <button class="primary" on:click={handleAdd}>Create</button>
     </div>
   </div>
