@@ -127,7 +127,7 @@ autoapi-example-svelte/
 │   └── vite-env.d.ts          # Vite type definitions
 ├── public/
 │   └── favicon.svg            # Application icon
-├── .autoapirc.json            # AutoAPI configuration
+├── .apisorceryrc.json            # AutoAPI configuration
 ├── .env                       # Environment variables
 ├── package.json               # Dependencies and scripts
 ├── tsconfig.json              # TypeScript configuration
@@ -139,7 +139,7 @@ autoapi-example-svelte/
 
 ### Configuration
 
-`.autoapirc.json`:
+`.apisorceryrc.json`:
 ```json
 {
   "url": "http://localhost:3000/api-json",
@@ -626,11 +626,11 @@ npm run start:dev
 # Verify backend is running
 curl http://localhost:3000/api-json
 
-# Check .autoapirc.json configuration
-cat .autoapirc.json
+# Check .apisorceryrc.json configuration
+cat .apisorceryrc.json
 
 # Manually regenerate
-npx autoapi generate
+npx @apisorcery/cli generate
 ```
 
 #### 3. TypeScript Errors
