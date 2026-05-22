@@ -1,6 +1,6 @@
-# AutoAPI Example - Svelte
+# ApiSorcery Example - Svelte
 
-A comprehensive user management system built with Svelte 5, TypeScript, and AutoAPI. This project demonstrates how to integrate AutoAPI-generated type-safe API clients with a modern Svelte application.
+A comprehensive user management system built with Svelte 5, TypeScript, and ApiSorcery. This project demonstrates how to integrate ApiSorcery-generated type-safe API clients with a modern Svelte application.
 
 ## 📋 Table of Contents
 
@@ -9,7 +9,7 @@ A comprehensive user management system built with Svelte 5, TypeScript, and Auto
 - [Prerequisites](#prerequisites)
 - [Quick Start](#quick-start)
 - [Project Structure](#project-structure)
-- [AutoAPI Integration](#autoapi-integration)
+- [ApiSorcery Integration](#autoapi-integration)
 - [Development Guide](#development-guide)
 - [Build and Deployment](#build-and-deployment)
 - [API Documentation](#api-documentation)
@@ -28,7 +28,7 @@ A comprehensive user management system built with Svelte 5, TypeScript, and Auto
 - **Responsive Design**: Mobile-friendly interface
 
 ### Technical Features
-- **Type-Safe API**: AutoAPI-generated TypeScript clients
+- **Type-Safe API**: ApiSorcery-generated TypeScript clients
 - **Reactive State**: Svelte 5 reactive statements and stores
 - **Component Architecture**: Modular, reusable components
 - **SCSS Styling**: Organized, maintainable styles
@@ -43,7 +43,7 @@ A comprehensive user management system built with Svelte 5, TypeScript, and Auto
 - **Styling**: SCSS (sass-embedded)
 - **HTTP Client**: Axios
 - **Date Handling**: Day.js
-- **API Generation**: AutoAPI
+- **API Generation**: ApiSorcery
 - **Code Quality**: ESLint, Prettier
 
 ## 📦 Prerequisites
@@ -99,10 +99,10 @@ bash verify-setup.sh
 ## 📁 Project Structure
 
 ```
-autoapi-example-svelte/
+apisorcery-example-svelte/
 ├── src/
 │   ├── apis/
-│   │   └── auto/              # AutoAPI-generated clients
+│   │   └── auto/              # ApiSorcery-generated clients
 │   │       └── demo/
 │   │           ├── ApiUser.ts # User API client
 │   │           └── types.ts   # API type definitions
@@ -127,7 +127,7 @@ autoapi-example-svelte/
 │   └── vite-env.d.ts          # Vite type definitions
 ├── public/
 │   └── favicon.svg            # Application icon
-├── .apisorceryrc.json            # AutoAPI configuration
+├── .apisorceryrc.json            # ApiSorcery configuration
 ├── .env                       # Environment variables
 ├── package.json               # Dependencies and scripts
 ├── tsconfig.json              # TypeScript configuration
@@ -135,7 +135,7 @@ autoapi-example-svelte/
 └── svelte.config.js           # Svelte configuration
 ```
 
-## 🔌 AutoAPI Integration
+## 🔌 ApiSorcery Integration
 
 ### Configuration
 
@@ -150,7 +150,7 @@ autoapi-example-svelte/
 
 ### Generated API Client
 
-AutoAPI generates type-safe API clients:
+ApiSorcery generates type-safe API clients:
 
 ```typescript
 // src/apis/auto/demo/ApiUser.ts
@@ -722,12 +722,12 @@ npm install
 
 ## 📄 License
 
-This project is part of the AutoAPI examples collection.
+This project is part of the ApiSorcery examples collection.
 
 ## 🔗 Related Projects
 
-- [autoapi-example-vue3](../autoapi-example-vue3) - Vue 3 implementation
-- [autoapi-example-react](../autoapi-example-react) - React implementation
+- [apisorcery-example-vue3](../apisorcery-example-vue3) - Vue 3 implementation
+- [apisorcery-example-react](../apisorcery-example-react) - React implementation
 - [ruoqing-product-demo-nestjs](../ruoqing-product-demo-nestjs) - Backend service
 
 ## 📞 Support
@@ -736,8 +736,8 @@ For issues and questions:
 1. Check this README
 2. Review the troubleshooting section
 3. Check the backend service documentation
-4. Review AutoAPI documentation
+4. Review ApiSorcery documentation
 
 ---
 
-**Built with ❤️ using Svelte 5 and AutoAPI**
+**Built with ❤️ using Svelte 5 and ApiSorcery**
