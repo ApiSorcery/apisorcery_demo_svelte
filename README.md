@@ -9,7 +9,7 @@ A comprehensive user management system built with Svelte 5, TypeScript, and ApiS
 - [Prerequisites](#prerequisites)
 - [Quick Start](#quick-start)
 - [Project Structure](#project-structure)
-- [ApiSorcery Integration](#autoapi-integration)
+- [ApiSorcery Integration](#apisorcery-integration)
 - [Development Guide](#development-guide)
 - [Build and Deployment](#build-and-deployment)
 - [API Documentation](#api-documentation)
@@ -18,6 +18,7 @@ A comprehensive user management system built with Svelte 5, TypeScript, and ApiS
 ## ✨ Features
 
 ### Core Functionality
+
 - **User Management**: Complete CRUD operations for user data
 - **Advanced Search**: Filter users by code, name, and status
 - **Pagination**: Efficient data browsing with customizable page sizes
@@ -28,6 +29,7 @@ A comprehensive user management system built with Svelte 5, TypeScript, and ApiS
 - **Responsive Design**: Mobile-friendly interface
 
 ### Technical Features
+
 - **Type-Safe API**: ApiSorcery-generated TypeScript clients
 - **Reactive State**: Svelte 5 reactive statements and stores
 - **Component Architecture**: Modular, reusable components
@@ -75,6 +77,7 @@ npm run api
 ```
 
 This command:
+
 - Fetches OpenAPI spec from backend
 - Generates TypeScript API clients
 - Creates type definitions
@@ -140,6 +143,7 @@ apisorcery-example-svelte/
 ### Configuration
 
 `.apisorceryrc.json`:
+
 ```json
 {
   "url": "http://localhost:3000/api-json",
@@ -154,38 +158,28 @@ ApiSorcery generates type-safe API clients:
 
 ```typescript
 // src/apis/auto/demo/ApiUser.ts
-export async function getUserPaged(
-  params: UserPagedRequestDto
-): Promise<UserPagedResponseDto> {
+export async function getUserPaged(params: UserPagedRequestDto): Promise<UserPagedResponseDto> {
   // Implementation
 }
 
-export async function addUser(
-  params: UserAddRequestDto
-): Promise<void> {
+export async function addUser(params: UserAddRequestDto): Promise<void> {
   // Implementation
 }
 
-export async function modifyUser(
-  params: UserModifyRequestDto
-): Promise<void> {
+export async function modifyUser(params: UserModifyRequestDto): Promise<void> {
   // Implementation
 }
 
-export async function removeUser(
-  params: { id: number }
-): Promise<void> {
+export async function removeUser(params: { id: number }): Promise<void> {
   // Implementation
 }
 
-export async function validateCode(
-  params: { code: string }
-): Promise<boolean> {
+export async function validateCode(params: { code: string }): Promise<boolean> {
   // Implementation
 }
 
 export async function exportUsers(
-  params: UserExportRequestDto
+  params: UserExportRequestDto,
 ): Promise<{ data: Blob; name: string }> {
   // Implementation
 }
@@ -200,7 +194,7 @@ import * as apiUser from '@/apis/auto/demo/ApiUser';
 const response = await apiUser.getUserPaged({
   pagination: { page: 1, limit: 10 },
   code: 'USER001',
-  name: 'John'
+  name: 'John',
 });
 
 // Add new user
@@ -209,7 +203,7 @@ await apiUser.addUser({
   name: 'Jane Doe',
   email: 'jane@example.com',
   gender: 2,
-  status: true
+  status: true,
 });
 ```
 
@@ -218,6 +212,7 @@ await apiUser.addUser({
 ### Component Architecture
 
 #### UserPage.svelte (Main Container)
+
 - Manages application state
 - Coordinates child components
 - Handles API calls
@@ -230,7 +225,7 @@ let dataSource: UserModel[] = [];
 let pagination: PaginationConfig = {
   current: 1,
   pageSize: 10,
-  total: 0
+  total: 0,
 };
 
 // API integration
@@ -239,9 +234,9 @@ async function getList() {
   const res = await apiUser.getUserPaged({
     pagination: {
       page: pagination.current,
-      limit: pagination.pageSize
+      limit: pagination.pageSize,
     },
-    ...queryModel
+    ...queryModel,
   });
   dataSource = res.results || [];
   pagination.total = res.total || 0;
@@ -250,6 +245,7 @@ async function getList() {
 ```
 
 #### QueryForm.svelte (Search Component)
+
 - Search input fields
 - Filter controls
 - Event dispatching
@@ -257,10 +253,10 @@ async function getList() {
 ```svelte
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  
+
   export let model: QueryModel;
   const dispatch = createEventDispatcher();
-  
+
   function handleFilter() {
     dispatch('filter');
   }
@@ -268,18 +264,21 @@ async function getList() {
 ```
 
 #### UserTable.svelte (Data Display)
+
 - Table rendering
 - Pagination controls
 - Action buttons
 - Export functionality
 
 #### UserForm.svelte (Form Component)
+
 - Form fields with validation
 - Image upload
 - Async code validation
 - Error handling
 
 #### UserModal.svelte (Modal Wrapper)
+
 - Modal backdrop
 - Close handling
 - Form integration
@@ -291,6 +290,7 @@ User Action → Component Event → Parent Handler → API Call → State Update
 ```
 
 Example:
+
 ```
 Click "Create" → dispatch('add') → handleAdd() → modalVisible = true → Show Modal
 ```
@@ -298,6 +298,7 @@ Click "Create" → dispatch('add') → handleAdd() → modalVisible = true → S
 ### Styling Approach
 
 Global styles in `app.scss`:
+
 ```scss
 * {
   margin: 0;
@@ -312,6 +313,7 @@ body {
 ```
 
 Component-scoped styles:
+
 ```svelte
 <style lang="scss">
   .user-table {
@@ -326,6 +328,7 @@ Component-scoped styles:
 ### State Management
 
 Svelte's reactive statements:
+
 ```typescript
 // Reactive declarations
 $: totalPages = Math.ceil(pagination.total / pagination.pageSize);
@@ -340,12 +343,13 @@ $: if (model.avatar) {
 ### Form Validation
 
 Real-time validation:
+
 ```typescript
 async function validateCode(code: string): Promise<boolean> {
   if (!code || operateType !== 'add') {
     return true;
   }
-  
+
   try {
     const codeExists = await apiUser.validateCode({ code });
     if (codeExists) {
@@ -367,23 +371,23 @@ async function validateCode(code: string): Promise<boolean> {
 async function handleFileChange(event: Event) {
   const file = target.files?.[0];
   if (!file) return;
-  
+
   // Validate size
   const size = Number((file.size / 1024 / 1024).toFixed(2));
   if (size > 10) {
     message.warning('File size exceeds limit (10MB)');
     return;
   }
-  
+
   // Upload
   const formData = new FormData();
   formData.append('file', file);
-  
-  const response = await fetch(
-    `${import.meta.env.VITE_GLOB_BASE_API}/file/upload`,
-    { method: 'POST', body: formData }
-  );
-  
+
+  const response = await fetch(`${import.meta.env.VITE_GLOB_BASE_API}/file/upload`, {
+    method: 'POST',
+    body: formData,
+  });
+
   const result = await response.json();
   if (result.status === 0) {
     model.avatar = `${import.meta.env.VITE_GLOB_BASE_API}/file/${result.data}`;
@@ -397,13 +401,13 @@ async function handleFileChange(event: Event) {
 async function handleExport() {
   try {
     message.loading({ content: 'Exporting users...', key: 'export', duration: 0 });
-    
+
     const response = await apiUser.exportUsers({
       code: queryModel.code || '',
       name: queryModel.name || '',
-      email: ''
+      email: '',
     });
-    
+
     // Create download link
     const url = window.URL.createObjectURL(response.data);
     const link = document.createElement('a');
@@ -413,7 +417,7 @@ async function handleExport() {
     link.click();
     document.body.removeChild(link);
     window.URL.revokeObjectURL(url);
-    
+
     message.destroy('export');
     message.success('Export completed successfully!');
   } catch (error) {
@@ -480,11 +484,13 @@ echo "Deployment completed!"
 ```
 
 Make it executable:
+
 ```bash
 chmod +x deploy_prod.sh
 ```
 
 Run deployment:
+
 ```bash
 ./deploy_prod.sh
 ```
@@ -494,6 +500,7 @@ Run deployment:
 ### User Management Endpoints
 
 #### Get Paginated Users
+
 ```typescript
 getUserPaged(params: {
   pagination: { page: number; limit: number };
@@ -507,6 +514,7 @@ getUserPaged(params: {
 ```
 
 #### Add User
+
 ```typescript
 addUser(params: {
   code: string;
@@ -520,6 +528,7 @@ addUser(params: {
 ```
 
 #### Modify User
+
 ```typescript
 modifyUser(params: {
   id: number;
@@ -534,6 +543,7 @@ modifyUser(params: {
 ```
 
 #### Remove User
+
 ```typescript
 removeUser(params: {
   id: number;
@@ -541,6 +551,7 @@ removeUser(params: {
 ```
 
 #### Validate Code
+
 ```typescript
 validateCode(params: {
   code: string;
@@ -548,6 +559,7 @@ validateCode(params: {
 ```
 
 #### Export Users
+
 ```typescript
 exportUsers(params: {
   code?: string;
@@ -605,6 +617,7 @@ interface SelectOption {
 **Problem**: Cannot connect to backend API
 
 **Solution**:
+
 ```bash
 # Check backend is running
 curl http://localhost:3000/health
@@ -613,7 +626,7 @@ curl http://localhost:3000/health
 cat .env
 
 # Restart backend service
-cd ../ruoqing-product-demo-nestjs
+cd ../apisorcery-demo-nestjs
 npm run start:dev
 ```
 
@@ -622,6 +635,7 @@ npm run start:dev
 **Problem**: `npm run api` fails
 
 **Solution**:
+
 ```bash
 # Verify backend is running
 curl http://localhost:3000/api-json
@@ -638,6 +652,7 @@ npx @apisorcery/cli generate
 **Problem**: Type errors in IDE
 
 **Solution**:
+
 ```bash
 # Run type checking
 npm run check
@@ -653,6 +668,7 @@ npm run api
 **Problem**: SCSS preprocessing fails
 
 **Solution**:
+
 ```bash
 # Install sass-embedded
 npm install -D sass-embedded
@@ -667,6 +683,7 @@ npm install
 **Problem**: Avatar upload not working
 
 **Solution**:
+
 - Check file size (must be < 10MB)
 - Verify backend upload endpoint is accessible
 - Check CORS configuration
@@ -677,6 +694,7 @@ npm install
 **Problem**: Export button doesn't download file
 
 **Solution**:
+
 - Check browser console for errors
 - Verify backend export endpoint
 - Check browser download settings
@@ -724,15 +742,10 @@ npm install
 
 This project is part of the ApiSorcery examples collection.
 
-## 🔗 Related Projects
-
-- [apisorcery-example-vue3](../apisorcery-example-vue3) - Vue 3 implementation
-- [apisorcery-example-react](../apisorcery-example-react) - React implementation
-- [ruoqing-product-demo-nestjs](../ruoqing-product-demo-nestjs) - Backend service
-
 ## 📞 Support
 
 For issues and questions:
+
 1. Check this README
 2. Review the troubleshooting section
 3. Check the backend service documentation
