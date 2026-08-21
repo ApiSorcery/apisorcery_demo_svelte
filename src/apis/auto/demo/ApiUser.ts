@@ -45,7 +45,10 @@ export const getUserPaged = base.createJsonRequest<
 /**
  * Modify user information
  */
-export const modifyUser = base.createJsonRequest<Model.UserModifyRequestDto>((data) => ({
+export const modifyUser = base.createJsonRequest<
+  Model.UserModifyRequestDto,
+  Model.ModifyUserResponse
+>((data) => ({
   url: `/user`,
   method: 'PATCH',
   data,
@@ -54,10 +57,12 @@ export const modifyUser = base.createJsonRequest<Model.UserModifyRequestDto>((da
 /**
  * Delete user
  */
-export const removeUser = base.createJsonRequest<Model.RemoveUserRequest>((req) => ({
-  url: `/user/${req.id}`,
-  method: 'DELETE',
-}));
+export const removeUser = base.createJsonRequest<Model.RemoveUserRequest, Model.RemoveUserResponse>(
+  (req) => ({
+    url: `/user/${req.id}`,
+    method: 'DELETE',
+  }),
+);
 
 /**
  * Validate if user code exists
